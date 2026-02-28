@@ -693,9 +693,9 @@ Choose an option:
 
 read -r -p "> (1-3): " chroice
 case "$chroice" in
-1) 
-2)
-3)
+1) chroot_set ;;
+2) cd /home/chronos; sudo -i -u chronos && cd /usr/local/chroots && ls
+3) delete_chrootz
 
 *) echo && echo "Invalid option." && echo ;;
 esac
@@ -704,6 +704,16 @@ esac
 
 run_crouton() {
 
+}
+
+delete_chrootz() {
+clear
+echo "Type the name of the chroot in which you would like to use: "
+read -p "> " chrootname
+
+    
+
+}
 
 get_booted_kernnum() {
     if doas "((\$(cgpt show -n \"$dst\" -i 2 -P) > \$(cgpt show -n \"$dst\" -i 4 -P)))"; then

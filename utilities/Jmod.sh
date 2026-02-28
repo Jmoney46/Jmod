@@ -31,7 +31,10 @@ mushm_info() {
     echo -ne "\033]0;mushm\007"
     if [ ! -f /mnt/stateful_partition/custom_greeting ]; then
         cat <<-EOF
-Welcome to mushm, A Custom Developer Shell for MurkMod
+JJJJJJJJ    m m     o       d
+   JJ      m m m   o o    d d
+   JJ      m m m   o o   d  d
+ JJJ       m m m    o     d d
 
 If you ended up here by accident, don’t worry! Simply close this tab and you’ll be good to go.
 
@@ -136,7 +139,7 @@ main() {
 EOF
         
         swallow_stdin
-        read -r -p "> (1-30): " choice
+        read -r -p "> (1-27): " choice
         case "$choice" in
         1) runjob doas bash ;;
         2) runjob doas "cd /home/chronos; sudo -i -u chronos" ;;
@@ -315,14 +318,14 @@ autodisableexts() {
 }
 
 set_passwd() {
-  echo "Enter a new password to use for mushm. This will be required to perform any future administrative actions, so make sure you write it down somewhere!"
+  echo "Enter a new password to use for Jmod. This will be required to perform any future administrative actions, so make sure you write it down somewhere!"
   read -r -p " > " newpassword
   doas "touch /mnt/stateful_partition/murkmod/mushm_password"
   doas "echo '$newpassword'> /mnt/stateful_partition/murkmod/mushm_password"
 }
 
 remove_passwd() {
-  echo "Removing password from mushm..."
+  echo "Removing password from Jmod..."
   doas "rm -f /mnt/stateful_partition/murkmod/mushm_password"
 }
 
@@ -588,7 +591,7 @@ uninstall_plugins() {
 }
 
 powerwash() {
-    echo "Are you sure you wanna powerwash? This will remove all user accounts and data, but won't remove fakemurk."
+    echo "Are you sure you wanna powerwash? This will remove all user accounts and data, but won't remove murkmod."
     sleep 2
     echo "(Press enter to continue, ctrl-c to cancel)"
     swallow_stdin
@@ -599,8 +602,8 @@ powerwash() {
 }
 
 revert() {
-    echo "This option will re-enroll your chromebook and restore it to its exact state before fakemurk was run. This is useful if you need to quickly go back to normal."
-    echo "This is *permanent*. You will not be able to fakemurk again unless you re-run everything from the beginning."
+    echo "This option will re-enroll your chromebook and restore it to its exact state before murkmod was run. This is useful if you need to quickly go back to normal."
+    echo "This is *permanent*. You will not be able to murkmod again unless you re-run everything from the beginning."
     echo "Are you sure - 100% sure - that you want to continue? (press enter to continue, ctrl-c to cancel)"
     swallow_stdin
     read -r
@@ -679,49 +682,28 @@ lsbval() {
 
 
 install_crouton() {
-    # check if crouuton is already installed. if so, prompt the user to delete their old chroot
-    if [ -f /mnt/stateful_partition/crouton_installed ] ; then
-        read -p "Crouton is already installed. Would you like to delete your old chroot and create a new one? (y/N) " yn
-        case $yn in
-            [yY] ) doas "rm -rf /mnt/stateful_partition/crouton/chroots && rm -f /mnt/stateful_partition/crouton_installed";;
-            [nN] ) return;;
-            * ) return;;
-        esac
-    fi
-    echo "Installing Crouton..."
-    # if this is before v107, then we don't want to use the silence branch - audio is still supported
-    local local_version=$(lsbval GOOGLE_RELEASE)
-    if (( ${local_version%%\.*} <= 107 )); then
-        doas "bash <(curl -SLk https://git.io/JZEs0) -r bullseye -t xfce"
-    else
-        # theoretically we could copy or link the includes for cras, but im not entirely sure how to do that
-        # CROUTON_BRANCH=longliveaudiotools supports audio at the versions we're looking at, but it's experimental and tends to be broken
-        # ig we can prompt the user?
-        echo "Your version of ChromeOS is too recent to support the current main branch of Crouton. You can either install Crouton without audio support, or install the experimental audio branch. Which would you like to do?"
-        echo "1. Install without audio support"
-        echo "2. Install with experimental audio support (may be extremely broken)"
-        read -r -p "> (1-2): " choice
-        if [ "$choice" == "1" ]; then
-            doas "CROUTON_BRANCH=silence bash <(curl -SLk https://git.io/JZEs0) -r bullseye -t xfce"
-        elif [ "$choice" == "2" ]; then
-            doas "CROUTON_BRANCH=longliveaudiotools bash <(curl -SLk https://git.io/JZEs0) -r bullseye -t xfce"
-        else
-            echo "Invalid option, defaulting to silence branch"
-            doas "CROUTON_BRANCH=silence bash <(curl -SLk https://git.io/JZEs0) -r bullseye -t xfce"
-        fi
-    fi
-    doas "bash <(echo 'touch /mnt/stateful_partition/crouton_installed')" # idfk about the syntax but it seems to work so im not complaining
+clear
+echo "Welcome to the crouton installer!
+Choose an option:
+    1) Install new chroot
+    2) Display Current chroots
+    3) Remove chroots
+
+"
+
+read -r -p "> (1-3): " chroice
+case "$chroice" in
+1) 
+2)
+3)
+
+*) echo && echo "Invalid option." && echo ;;
+esac
+
 }
 
 run_crouton() {
-    if [ -f /mnt/stateful_partition/crouton_installed ] ; then
-        echo "Use Crtl+Shift+Alt+Forward and Ctrl+Shift+Alt+Back to toggle between desktops"
-        doas "startxfce4"
-    else
-        echo "Install Crouton first!"
-        read -p "Press enter to continue."
-    fi
-}
+
 
 get_booted_kernnum() {
     if doas "((\$(cgpt show -n \"$dst\" -i 2 -P) > \$(cgpt show -n \"$dst\" -i 4 -P)))"; then

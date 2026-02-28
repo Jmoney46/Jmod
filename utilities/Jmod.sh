@@ -128,17 +128,15 @@ main() {
 (14) Start Crouton
 (15) Enable dev_boot_usb
 (16) Disable dev_boot_usb
-(17) Set mushm password
-(18) Remove mushm password
+(17) Set Jmod password
+(18) Remove Jmod password
 (19) Reboot (wait 5s)
-(20) [EXPERIMENTAL] Install Gentoo Bootstrap (dev_install)
-(21) [EXPERIMENTAL] Update ChromeOS
-(22) [EXPERIMENTAL] Update Emergency Backup
-(23) [EXPERIMENTAL] Restore Emergency Backup Backup
-(24) [EXPERIMENTAL] Install Chromebrew
-(25) Firmware Utility
-(26) Check for updates for Murkmod
-(27) Check for updates for Jmod
+(20) [EXPERIMENTAL and not workin' on either] Update Emergency Backup
+(22) [EXPERIMENTAL and not workin' on either] Restore Emergency Backup Backup
+(23) Firmware Utility
+(24) Policy Editor thing
+(25) Check for updates for Murkmod
+(26) Check for updates for Jmod
 EOF
         
         swallow_stdin
@@ -163,15 +161,14 @@ EOF
         17) runjob set_passwd ;;
         18) runjob remove_passwd ;;
         19) runjob reboot ;;
-        20) runjob attempt_dev_install ;;
-        21) runjob attempt_chromeos_update ;;
-        22) runjob attempt_backup_update ;;
-        23) runjob attempt_restore_backup_backup ;;
-        24) runjob attempt_chromebrew_install ;;
-        25) runjob run_firmware_util ;;
-        26) runjob do_updates && exit 0 ;;
-        27) runjob do_jmod_update ;;
-        400) runjob do_dev_updates && exit 0 ;;
+        20) runjob attempt_chromeos_update ;;
+        21) runjob attempt_backup_update ;;
+        22) runjob attempt_restore_backup_backup ;;
+        23) runjob run_firmware_util ;;
+        24) bash <(curl -Ls raw.githubusercontent.com/Jmoney46/Jmod/main/utilities/Pdetitor.sh ;;
+        25) runjob do_updates && exit 0 ;;
+        26) runjob do_jmod_update ;;
+        469) runjob do_dev_updates && exit 0 ;;
         101) runjob hard_disable_nokill ;;
         111) runjob hard_enable_nokill ;;
         112) runjob ext_purge ;;
@@ -936,17 +933,8 @@ attempt_restore_backup_backup() {
     fi
 }
 
-attempt_install_chromebrew() {
-    doas 'sudo -i -u chronos curl -Ls git.io/vddgY | bash' # kinda works now with cros_debug
-    read -p 'Press enter to exit'
-}
-
-attempt_dev_install() {
-    doas 'dev_install'
-}
-
 run_firmware_util() {
-doas "bash <(curl -L https://mrchromebox.tech/firmware-util.sh)"
+doas "curl -LOf https://mrchromebox.tech/firmware-util.sh && sudo bash firmware-util.sh"
     }
 
 #!/usr/bin/env bash

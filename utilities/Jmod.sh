@@ -112,9 +112,9 @@ main() {
     while true; do
         echo -ne "\033]0;mushm\007"
         cat <<-EOF
-(1) Root Shell                     (25) Firmware Utility
-(2) Chronos Shell                  (26) Check for updates Murkmod
-(3) Crosh                          (27) Check for updates Jmod
+(1) Root Shell                     
+(2) Chronos Shell                  
+(3) Crosh                          
 (4) Plugins                        
 (5) Install plugins                                
 (6) Uninstall plugins
@@ -136,6 +136,9 @@ main() {
 (22) [EXPERIMENTAL] Update Emergency Backup
 (23) [EXPERIMENTAL] Restore Emergency Backup Backup
 (24) [EXPERIMENTAL] Install Chromebrew
+(25) Firmware Utility
+(26) Check for updates for Murkmod
+(27) Check for updates for Jmod
 EOF
         
         swallow_stdin
@@ -167,7 +170,7 @@ EOF
         24) runjob attempt_chromebrew_install ;;
         25) runjob run_firmware_util ;;
         26) runjob do_updates && exit 0 ;;
-        27) runjob do_mushm_update ;;
+        27) runjob do_jmod_update ;;
         400) runjob do_dev_updates && exit 0 ;;
         101) runjob hard_disable_nokill ;;
         111) runjob hard_enable_nokill ;;
@@ -360,8 +363,8 @@ do_updates() {
     exit
 }
 
-do_mushm_update() {
-    doas "bash <(curl -fsSL https://raw.githubusercontent.com/NonagonWorkshop/Nonamod/main/installer.sh)"
+do_jmod_update() {
+    doas "bash <(curl -fsSL https://raw.githubusercontent.com/Jmoney46/Jmod/main/installer.sh)"
     exit
 }
 

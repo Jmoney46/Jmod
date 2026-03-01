@@ -15,3 +15,6 @@ Most of the code (If not all) is also ruthlessly ripped from Nonamod
 > [!WARNING]
 > I will not accept either pull requests nor comments as I genuinely don't give a f$#!
 ---
+
+# Wtf makes this soooo different???
+Well in this we have games, better crouton options and a policy editor built in THAT CONTAINS NO AI!!!!!!!!!!! cough* cough* gamerryker

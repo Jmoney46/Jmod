@@ -712,7 +712,9 @@ clear
 echo "Type the name of the chroot in which you would like to use: "
 read -p "> " chrootname
 
-    
+    sudo delete-chroot $chrootname
+    read -p "press enter "
+    exit
 
 }
 

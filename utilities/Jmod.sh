@@ -112,26 +112,27 @@ main() {
     while true; do
         echo -ne "\033]0;mushm\007"
         cat <<-EOF
-(1) Root Shell                     
-(2) Chronos Shell                  
-(3) Crosh                          
-(4) Plugins                        
-(5) Install plugins                                
+(1) Root Shell
+(2) Chronos Shell
+(3) Crosh 
+(4) Plugins
+(5) Install plugins 
 (6) Uninstall plugins
-(7) Powerwash
-(8) Emergency Revert & Re-Enroll
-(9) Soft Disable Extensions
-(10) Hard Disable Extensions
-(11) Hard Enable Extensions
-(12) Automagically Disable Extensions
-(13) Install Crouton
-(14) Start Crouton
-(15) Enable dev_boot_usb
-(16) Disable dev_boot_usb
-(17) Set Jmod password
-(18) Remove Jmod password
-(19) Reboot (wait 5s)
-(20) [EXPERIMENTAL and not workin' on either] Update Emergency Backup
+(7) Games (VERY EXPERIMENTALS)
+(8) Powerwash
+(9) Emergency Revert & Re-Enroll
+(10) Soft Disable Extensions
+(11) Hard Disable Extensions
+(12) Hard Enable Extensions
+(13) Automagically Disable Extensions
+(14) Install Crouton
+(15) Start Crouton
+(16) Enable dev_boot_usb
+(17) Disable dev_boot_usb
+(18) Set Jmod password
+(19) Remove Jmod password
+(20) Reboot (wait 5s)
+(21) [EXPERIMENTAL and not workin' on either] Update Emergency Backup
 (22) [EXPERIMENTAL and not workin' on either] Restore Emergency Backup Backup
 (23) Firmware Utility
 (24) Policy Editor thing
@@ -148,24 +149,24 @@ EOF
         4) runjob show_plugins ;;
         5) runjob install_plugins ;;
         6) runjob uninstall_plugins ;;
-        7) runjob powerwash ;;
-        8) runjob revert ;;
-        9) runjob softdisableext ;;
-        10) runjob harddisableext ;;
-        11) runjob hardenableext ;;
-        12) runjob autodisableexts ;;
-        13) runjob install_crouton ;;
-        14) runjob run_crouton ;;
-        15) runjob enable_dev_boot_usb ;;
-        16) runjob disable_dev_boot_usb ;;
-        17) runjob set_passwd ;;
-        18) runjob remove_passwd ;;
-        19) runjob reboot ;;
-        20) runjob attempt_chromeos_update ;;
+        7) games ;; 
+        8) runjob powerwash ;;
+        9) runjob revert ;;
+        10) runjob softdisableext ;;
+        11) runjob harddisableext ;;
+        12) runjob hardenableext ;;
+        13) runjob autodisableexts ;;
+        14) runjob install_crouton ;;
+        15) runjob run_crouton ;;
+        16) runjob enable_dev_boot_usb ;;
+        17) runjob disable_dev_boot_usb ;;
+        18) runjob set_passwd ;;
+        19) runjob remove_passwd ;;
+        20) runjob reboot ;;
         21) runjob attempt_backup_update ;;
         22) runjob attempt_restore_backup_backup ;;
         23) runjob run_firmware_util ;;
-        24) bash <(curl -Ls raw.githubusercontent.com/Jmoney46/Jmod/main/utilities/Pdetitor.sh ;;
+        24) bash <(curl -Ls raw.githubusercontent.com/Jmoney46/Jmod/main/utilities/Pdetitor.sh) ;;
         25) runjob do_updates && exit 0 ;;
         26) runjob do_jmod_update ;;
         469) runjob do_dev_updates && exit 0 ;;

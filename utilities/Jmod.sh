@@ -28,7 +28,7 @@ traps() {
 }
 
 mushm_info() {
-    echo -ne "\033]0;mushm\007"
+    echo -ne "\033]0;Jmod\007"
     if [ ! -f /mnt/stateful_partition/custom_greeting ]; then
         cat <<-EOF
 JJJJJJJJ    m m     o       d
@@ -40,8 +40,8 @@ If you ended up here by accident, don’t worry! Simply close this tab and you�
 
 This shell includes a variety of utilities designed to perform actions on a MurkModded Chromebook.
 
-Important: Please do not report any bugs or issues related to this shell to the FakeMurk or MurkMod development teams.
-It’s an independent tool and not officially supported by them.
+Important: I made this mainly for myself and if *I* find any error I will fix them and I will not read any comments
+and won't add any other members than myself!!!!!!!!!
 
 EOF
     else
@@ -81,7 +81,7 @@ locked_main() {
     traps
     mushm_info
     while true; do
-        echo -ne "\033]0;mushm\007"
+        echo -ne "\033]0;Jmod\007"
         cat <<-EOF
 (1) Emergency Revert & Re-Enroll
 (2) Soft Disable Extensions
@@ -110,7 +110,7 @@ main() {
     traps
     mushm_info
     while true; do
-        echo -ne "\033]0;mushm\007"
+        echo -ne "\033]0;Jmod\007"
         cat <<-EOF
 (1) Root Shell
 (2) Chronos Shell
@@ -552,7 +552,7 @@ uninstall_plugins() {
         for i in "${!plugin_info[@]}"; do
             echo "$(($i+1)). ${plugin_info[$i]}"
         done
-        echo "0. Exit back to mushm"
+        echo "0. Exit back to Jmod"
         read -r -p "Enter a number to uninstall a plugin, or 0 to exit: " choice
 
         if [ "$choice" -eq 0 ]; then
@@ -695,7 +695,7 @@ Choose an option:
 read -r -p "> (1-3): " chroice
 case "$chroice" in
 1) chroot_set ;;
-2) cd /home/chronos; sudo -i -u chronos && cd /usr/local/chroots && ls
+2) cd .. && cd /usr/local/chroots && ls
 3) delete_chrootz
 
 *) echo && echo "Invalid option." && echo ;;
@@ -713,9 +713,16 @@ echo "Type the name of the chroot in which you would like to use: "
 read -p "> " chrootname
 
     sudo delete-chroot $chrootname
-    read -p "press enter "
-    exit
+    
+    echo "Deleted $chrootname"
+    echo "Would you like to delete some more?"
+    read -p "(y or n)> " delmore
 
+    case "$delmore" in
+    y) delete_chrootz ;;
+    n) exit ;;
+    * echo && echo "I'll take that as a no." && exit ;;
+    esac
 }
 
 get_booted_kernnum() {

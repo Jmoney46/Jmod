@@ -1,9 +1,7 @@
 # Jmod
 Pretty much my custom version of nonamod wit all the stuff I want since star wont give me access
+Most of the code (If not all) is also ruthlessly ripped from Nonamod
 
-> [!WARNING]
-> Most of the code (If not all) is ruthlessly ripped from Nonamod
----
 
 # How to install?
 
@@ -13,3 +11,7 @@ Pretty much my custom version of nonamod wit all the stuff I want since star won
    bash <(curl -fsSL raw.githubusercontent.com/Jmoney46/Jmod/main/installer.sh)
    ```
 3. YAY UR DONE!
+
+> [!WARNING]
+> I will not accept either pull requests nor comments as I genuinely don't give a f$#!
+---

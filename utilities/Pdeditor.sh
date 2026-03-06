@@ -2,7 +2,7 @@
 
 mkdir -p /etc/opt/chrome/policies/managed
 
-cat > /etc/opt/chrome/policies/managed/polygon_policy.json << EOF
+cat > /etc/opt/chrome/policies/managed/pdeditor.json << EOF
 {
   "URLBlocklist": [],
   "SystemFeaturesDisableList": [],
